@@ -21,6 +21,7 @@ function savestats = DICOT_segmentation(filename,Findex,kernel_choice,outfolder,
 % DICOT (CyCelS lab, IISER Pune)
 
 % _init_
+
 ki =kernel_choice; 
 listLen= cell(1,max(Findex));
 savestats=[];
@@ -28,8 +29,11 @@ outfile=[outfolder, '/segmentedmovie.tif'];
 if exist(outfile, 'file')
     delete(outfile);
 end
-
+w = waitbar(0, 'Granule segmentation..');
+p = 0; 
 for image_no=1:Findex
+    p = p+1
+    waitbar(p/Findex)
     % Read Image(i)
     img1=imread(filename,image_no);
     % ===== Segmentation =====
@@ -62,6 +66,7 @@ for image_no=1:Findex
         savestats=[savestats; stat];
     end
 end
+delete(w)
 try
     conlistLen = cat(1, listLen{:});%1:frame no, 2:obj no, 3:x, 4:y, 5:length
 catch
