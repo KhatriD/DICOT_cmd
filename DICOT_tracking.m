@@ -1,4 +1,4 @@
-function [tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_search_radius, scal_fact, interval, distUnit, timeUnit)
+function [tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_search_radius, scal_fact, interval, minimal_track_interval)
 %[...] = DICOT_TRACKING generates a quick overlay of segmentated objects on the image
 %
 %   [TRACKS, OBJECT_NUM, TRACK_MATRIX] = DICOT_TRACKING(OUTFOLDER, STATS, SEARCH_RADIUS, SCALING_FACTOR, INTERVAL, PIXEL_UNIT, TIME_UNIT) links objects based on nearest neighbouring method to generate tracks. Returns the following parameters,
@@ -29,7 +29,8 @@ beadlabel=zeros(size(x)); % vector of bead labels.
 i=min(frame); spanA=find(frame==i); % initialize w/ first frame.
 beadlabel(1:length(spanA))=1:length(spanA); % refers to absolute indexing of x,y,frame,etc.
 lastlabel=length(spanA); % start off with unique bead labels for all the beads in the first frame
-
+distUnit = 'px'; 
+timeUnit = 's';
 % ===== Linking =====
 w =waitbar(0, 'Tracking objects..');
 p=0;
@@ -65,7 +66,7 @@ for i=1:lastlabel
     p=p+1;
     waitbar(p/(numel(fidx)+lastlabel));% Y [mod]% reassemble beadlabel into a structured array 'tracks' containing all info
     beadi=find(beadlabel==i);
-    if  numel(x(beadi))>=3 % ARC minimum no. of data points in a trajectory
+    if  numel(x(beadi))>=minimal_track_interval % ARC minimum no. of data points in a trajectory
     re=re+1;%ARC renumbering
     tracks(re).x=x(beadi);
     tracks(re).y=y(beadi);
