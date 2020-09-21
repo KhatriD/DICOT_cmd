@@ -32,7 +32,7 @@ end
 w = waitbar(0, 'Granule segmentation..');
 p = 0; 
 for image_no=1:Findex
-    p = p+1
+    p = p+1;
     waitbar(p/Findex)
     % Read Image(i)
     img1=imread(filename,image_no);
