@@ -58,7 +58,8 @@ end
 emptybead.x=0; emptybead.y=0; emptybead.area=0; emptybead.frame=0;
 ALLtracks=cell(lastlabel,1); % Initialize for purposes of speed and memory management.
 re=0;
-
+p = 0; 
+waitbar(p, w,'Compiling Data..')
 % ===== Tracking =====
 for i=1:lastlabel
     p=p+1;
