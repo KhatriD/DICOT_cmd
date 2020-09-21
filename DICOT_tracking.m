@@ -1,7 +1,7 @@
 function [tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_search_radius, scal_fact, interval, minimal_track_interval)
 %[...] = DICOT_TRACKING generates a quick overlay of segmentated objects on the image
 %
-%   [TRACKS, OBJECT_NUM, TRACK_MATRIX] = DICOT_TRACKING(OUTFOLDER, STATS, SEARCH_RADIUS, SCALING_FACTOR, INTERVAL, PIXEL_UNIT, TIME_UNIT) links objects based on nearest neighbouring method to generate tracks. Returns the following parameters,
+%   [TRACKS, OBJECT_NUM, TRACK_MATRIX] = DICOT_TRACKING(OUTFOLDER, STATS, SEARCH_RADIUS, SCALING_FACTOR, INTERVAL, PIXEL_UNIT, MINIMUM_TRACK_INTERVAL) links objects based on nearest neighbouring method to generate tracks. Returns the following parameters,
 %       TRACKS - all tracks across all frames in an array
 %       OBJECT_NUM - number of objected detected
 %       TRACK_MATRIX - tracks formatted into matrix for clean readout and post-processing
@@ -11,8 +11,8 @@ function [tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_sea
 %   SEARCH_RADIUS radius for track linking between objects across frames
 %   SCALING_FACTOR pixel to distance conversion scaling factor
 %   INTERVAL time interval in between frames
-%   PIXEL_UNIT distance unit
-%   TIME_UNIT time unit
+%   MINIMUM_TRACK_INTERVAL minimum time length of trajectory 
+%   
 %
 % See also MAKEMOVIE_DICOT, DICOT_SEGMENTATION
 
