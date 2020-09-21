@@ -83,18 +83,17 @@ Num_frames  = imfinfo(fullfilename);
 savestats = DICOT_segmentation(fullfilename, length(Num_frames),...
  kernel_choice, outfolder,distUnit);
 %% ========== Tracking section ==========
-prompt_seg_track = {'Gating/Linking Threshold:',...
-    'Scaling_factor:', 'Distance Unit:','Time Unit', 'Time Interval'};
+prompt_seg_track = {'Search Radius (px) :',...
+    'Pixel size (μm/pixel):','Time Interval (s):', 'Minimum track interval (s):'};
 dlgtitle_seg_track = 'Tracking Parameters';
 dims_seg_track= [1 60];
-definput_seg_track =  {'10','1.00','px', 's','1'};
+definput_seg_track =  {'5','1.00','1', '3'};
 user_choice_track = inputdlg(prompt_seg_track, dlgtitle_seg_track, dims_seg_track, definput_seg_track);
 micron_search_radius = str2double(user_choice_track{1});
 scal_fact = str2double(user_choice_track{2});
-distUnit = str2double(user_choice_track{3});
-timeUnit = str2double(user_choice_track{4});
-interval = str2double(user_choice_track{5});
-[tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_search_radius, scal_fact, interval, distUnit, timeUnit);
+interval = str2double(user_choice_track{3});
+minimal_track_interval = str2double(user_choice_track{4}); 
+[tracks,objno,outmat] = DICOT_tracking(outfolder, savestats, micron_search_radius, scal_fact, interval, minimal_track_interval);
 % ===== Tracking output save =====
 question_save  = questdlg('Would you like to save tracking output');
 switch question_save
