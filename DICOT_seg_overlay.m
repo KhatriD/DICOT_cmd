@@ -26,6 +26,6 @@ end
 % create overlay
 Coords2overlay = cat(1, region_props_coords.Centroid); 
 figure(1), imshow(test_image); hold on 
-plot(Coords2overlay(:,1), Coords2overlay(:,2),'r.', 'MarkerSize', 10);
+plot(Coords2overlay(:,1), Coords2overlay(:,2),'r.', 'MarkerSize', 4);
 hold off 
 end
